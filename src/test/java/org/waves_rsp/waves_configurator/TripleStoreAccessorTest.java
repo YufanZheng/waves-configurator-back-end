@@ -16,7 +16,7 @@ public class TripleStoreAccessorTest {
 					  "@prefix ex: <http://www.example.org/vocabulary#> .\n"  +
 					  "@prefix : <http://www.example.org/exampleDocument#> .\n" +
 					  "\n" +
-					  ":G1 { \n"+ 
+					  ":G1 { \n" + 
 					  "     :Monica a ex:Person ;\n" +
 					  "     ex:name 'Monica Murphy' ;\n" +
 					  "     ex:homepage <http://www.monicamurphy.org> ;\n" +
@@ -26,10 +26,9 @@ public class TripleStoreAccessorTest {
 					  "}\n";
 		System.out.println("-------- Run test for convert TriG configuration string to Jena model --------\n");
 		System.out.println("The trig string below is used for test:\n");
-		System.out.print(trig);
-		Model model = ModelFactory.createDefaultModel();
-		assertEquals(true, model.isEmpty());
-		model = this.tsAccessor.convertToModel(trig);
+		System.out.print(trig + "\n");
+		Model model = this.tsAccessor.convertToModel(trig);
+		System.out.println("Converted TriG Model size: " + model.size());
 		assertTrue( model.size() != 0 );
 	}
 
