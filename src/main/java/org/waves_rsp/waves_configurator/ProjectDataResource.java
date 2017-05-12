@@ -32,8 +32,8 @@ public class ProjectDataResource {
     @Consumes(MediaType.TEXT_PLAIN)
     public void loadTriG(String trig) {
     	log.info("Recieve the Trig Configuration from Client :\n\n" + trig);
-    	// Convert TriG String to Jena RDF Model and Put it into Triple Store
 		try {
+			// Convert TriG String to Jena RDF Model and Put it into Triple Store
 			DatasetGraph graph = tsAccessor.convert(trig);
 			String graphUri = tsAccessor.getGraphUri(graph);
 			Model graphModel = tsAccessor.getGraphModel(graph);

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="info">
+
+  <Appenders>
+    <Console name="defaultLog">
+      <PatternLayout pattern="%d{DEFAULT}|%p|%c{1.}|%m%n"/>
+    </Console>
+  </Appenders>
+
+  <Loggers>
+    <Logger name="org.waves_rsp"                level="debug"/>
+    <Logger name="org.waves_rsp.storm"          level="trace"/>
+    <Logger name="org.waves_rsp.rdf"            level="info"/>
+
+    <Logger name="org.apache.storm"             level="error"/>
+    <Logger name="backtype.storm"               level="warn"/>
+
+    <Logger name="kafka"                        level="warn"/>
+    <Logger name="org.apache.kafka.clients"     level="error"/>
+    <Logger name="storm.kafka"                  level="warn"/>
+    <Logger name="org.apache.zookeeper"         level="warn"/>
+
+    <Logger name="org.openrdf"                  level="info"/>
+
+    <Root level="info">
+      <AppenderRef ref="defaultLog"/>
+    </Root>
+  </Loggers>
+
+</Configuration>
+
