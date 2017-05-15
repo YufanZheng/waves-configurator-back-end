@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="6" failures="0" name="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" time="0.718" errors="1" skipped="0">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib"/>
+    <property name="java.vm.version" value="25.112-b16"/>
+    <property name="gopherProxySet" value="false"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/yufan/Documents/workspace/waves-configurator"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="FR"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/Users/yufan/Documents/workspace/waves-configurator"/>
+    <property name="java.runtime.version" value="1.8.0_112-b16"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/endorsed"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.io.tmpdir" value="/var/folders/3x/yj6c70nx52d3xcdp9721stx40000gn/T/"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="classworlds.conf" value="/Users/yufan/Documents/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf8884630684346357930.tmp"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/yufan/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.12.4"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="user.home" value="/Users/yufan"/>
+    <property name="user.timezone" value="Europe/Paris"/>
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="user.name" value="yufan"/>
+    <property name="java.class.path" value="/Applications/Eclipse.app/Contents/Eclipse/plugins/org.eclipse.m2e.maven.runtime_1.7.0.20160603-1931/jars/plexus-classworlds-2.5.2.jar"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B install"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="fr"/>
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_112"/>
+    <property name="java.ext.dirs" value="/Users/yufan/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
+    <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="/Users/yufan/Documents/workspace/waves-configurator/EMBEDDED"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="parseInvalidTrig" time="0.532"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="parseSingleGraphTrig" time="0.04"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="parseZeroGraphTrig" time="0.001"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getZeroGraphBaseUri" time="0.08"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getSingleGraphBaseUri" time="0.061">
+    <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at org.apache.jena.sparql.core.mem.QuadTableForm$1$1.listGraphNodes(QuadTableForm.java:60)
+	at org.apache.jena.sparql.core.mem.HexTable.listGraphNodes(HexTable.java:88)
+	at org.apache.jena.sparql.core.mem.DatasetGraphInMemory.size(DatasetGraphInMemory.java:372)
+	at org.waves_rsp.waves_configurator.utils.RDFHandlerTest.getSingleGraphBaseUri(RDFHandlerTest.java:103)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</error>
+    <system-out>
+-------- Run test for get base graph URI for single graph TriG --------
+
+(dataset
+  (graph)
+  (graph &lt;http://localhost:9091/waves/first-tests&gt;
+    (triple &lt;http://localhost:9091/waves/versailles/installation&gt; &lt;http://www.waves-rsp.org/configuration#clock&gt; _:cd353f044c24741909282b3ad2c9b96d)
+    (triple &lt;http://localhost:9091/waves/versailles/installation&gt; &lt;http://www.waves-rsp.org/configuration#name&gt; &quot;first-tests&quot;)
+    (triple &lt;http://localhost:9091/waves/versailles/installation&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.waves-rsp.org/configuration#Installation&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/installation&gt; &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; &quot;installation&quot;)
+    (triple &lt;http://localhost:9091/waves/versailles/installation&gt; &lt;http://www.waves-rsp.org/configuration#metrics&gt; _:c20e805a16ba217ec3de1ac65543a0e2)
+    (triple &lt;http://localhost:9091/waves/versailles/stream/3f&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.waves-rsp.org/configuration#Stream&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/stream/3f&gt; &lt;http://www.waves-rsp.org/configuration#installation&gt; &lt;http://localhost:9091/waves/versailles/installation&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/stream/3f&gt; &lt;http://www.waves-rsp.org/configuration#id&gt; 123)
+    (triple &lt;http://localhost:9091/waves/versailles/stream/3f&gt; &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; &quot;S-3f&quot;)
+    (triple _:b970ba9f3927a78f5b27ccff8235d70e &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.waves-rsp.org/configuration#RdfFeed&gt;)
+    (triple _:b970ba9f3927a78f5b27ccff8235d70e &lt;http://www.waves-rsp.org/configuration#feedType&gt; &quot;RdfDocument&quot;)
+    (triple _:b970ba9f3927a78f5b27ccff8235d70e &lt;http://www.waves-rsp.org/configuration#location&gt; &quot;file:///tmp/sample1.ttl&quot;)
+    (triple _:b970ba9f3927a78f5b27ccff8235d70e &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; &quot;doc1Feed&quot;)
+    (triple &lt;http://localhost:9091/waves/versailles/source/1i&gt; &lt;http://www.waves-rsp.org/configuration#numTasks&gt; &quot;4&quot;^^&lt;http://www.w3.org/2001/XMLSchema#int&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/source/1i&gt; &lt;http://www.waves-rsp.org/configuration#inputFolder&gt; &quot;../rdsz-algo/src/test/resources/examples/knoesis_linkedsensordata&quot;)
+    (triple &lt;http://localhost:9091/waves/versailles/source/1i&gt; &lt;http://www.waves-rsp.org/configuration#inputPattern&gt; &quot;.n3$&quot;)
+    (triple &lt;http://localhost:9091/waves/versailles/source/1i&gt; &lt;http://www.waves-rsp.org/configuration#eventRate&gt; &quot;PT2S&quot;^^&lt;http://www.w3.org/2001/XMLSchema#duration&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/source/1i&gt; &lt;http://www.waves-rsp.org/configuration#installation&gt; &lt;http://localhost:9091/waves/versailles/installation&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/source/1i&gt; &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; &quot;QIn-3f_S-1i&quot;)
+    (triple &lt;http://localhost:9091/waves/versailles/stream/1i&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.waves-rsp.org/configuration#Stream&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/stream/1i&gt; &lt;http://www.waves-rsp.org/configuration#installation&gt; &lt;http://localhost:9091/waves/versailles/installation&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/stream/1i&gt; &lt;http://www.waves-rsp.org/configuration#id&gt; 54)
+    (triple &lt;http://localhost:9091/waves/versailles/stream/1i&gt; &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; &quot;S-1i&quot;)
+    (triple _:cd353f044c24741909282b3ad2c9b96d &lt;http://www.waves-rsp.org/configuration#acceleration&gt; &quot;1.0&quot;^^&lt;http://www.w3.org/2001/XMLSchema#double&gt;)
+    (triple _:cd400b86c212f6ff7bc0b9e8c1d05ecf &lt;http://www.waves-rsp.org/configuration#query&gt; &quot;\r\n\t\tCONSTRUCT { ?s ?p ?o . }\r\n\t\tWHERE { GRAPH &lt;http://localhost:9091/kiosques&gt; { ?s ?p ?o . } }&quot;)
+    (triple _:cd400b86c212f6ff7bc0b9e8c1d05ecf &lt;http://www.waves-rsp.org/configuration#refreshInterval&gt; &quot;PT2M&quot;^^&lt;http://www.w3.org/2001/XMLSchema#duration&gt;)
+    (triple _:cd400b86c212f6ff7bc0b9e8c1d05ecf &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.waves-rsp.org/configuration#SparqlFeed&gt;)
+    (triple _:cd400b86c212f6ff7bc0b9e8c1d05ecf &lt;http://www.waves-rsp.org/configuration#feedType&gt; &quot;SPARQL&quot;)
+    (triple _:cd400b86c212f6ff7bc0b9e8c1d05ecf &lt;http://www.waves-rsp.org/configuration#location&gt; &quot;http://localhost:9091/sparql&quot;)
+    (triple _:cd400b86c212f6ff7bc0b9e8c1d05ecf &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; &quot;sparql1Feed&quot;)
+    (triple _:a035dc229cae58acf9f7ed91c0bae599 &lt;http://www.waves-rsp.org/configuration#windowSpan&gt; &quot;PT8S&quot;^^&lt;http://www.w3.org/2001/XMLSchema#duration&gt;)
+    (triple _:a035dc229cae58acf9f7ed91c0bae599 &lt;http://www.waves-rsp.org/configuration#stream&gt; &lt;http://localhost:9091/waves/versailles/stream/1i&gt;)
+    (triple _:a035dc229cae58acf9f7ed91c0bae599 &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; &quot;F-3f_S-1i&quot;)
+    (triple _:83d676bf1eb20903124c481b419689d1 &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.waves-rsp.org/configuration#RdfStore&gt;)
+    (triple _:83d676bf1eb20903124c481b419689d1 &lt;http://www.waves-rsp.org/configuration#storeType&gt; &quot;sesame&quot;)
+    (triple _:83d676bf1eb20903124c481b419689d1 &lt;http://www.waves-rsp.org/configuration#location&gt; &quot;http://localhost:9091/openrdf-sesame/repositories/waves&quot;)
+    (triple _:83d676bf1eb20903124c481b419689d1 &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; &quot;datalift-waves&quot;)
+    (triple &lt;http://localhost:9091/waves/versailles/filter/3f&gt; &lt;http://www.waves-rsp.org/configuration#query&gt; &quot;\r\n\t\tPREFIX w: &lt;http://www.waves-rsp.org/&gt;\r\n\t\tPREFIX dct: &lt;http://purl.org/dc/terms/&gt;\r\n\t\tPREFIX wgs84: &lt;http://www.w3.org/2003/01/geo/wgs84_pos#&gt;\r\n\t\tPREFIX sens-obs: &lt;http://knoesis.wright.edu/ssw/&gt;\r\n\t\tCONSTRUCT {\r\n\t\t\t?eventId dct:issued ?step ; w:observation ?obs .\r\n\t\t} WHERE {\r\n\t\t\t?obs a wgs84:Point .\r\n\t\t}&quot;)
+    (triple &lt;http://localhost:9091/waves/versailles/filter/3f&gt; &lt;http://www.waves-rsp.org/configuration#producesStream&gt; &lt;http://localhost:9091/waves/versailles/stream/3f&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/filter/3f&gt; &lt;http://www.waves-rsp.org/configuration#numTasks&gt; &quot;3&quot;^^&lt;http://www.w3.org/2001/XMLSchema#int&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/filter/3f&gt; &lt;http://www.waves-rsp.org/configuration#consumesStream&gt; _:a035dc229cae58acf9f7ed91c0bae599)
+    (triple &lt;http://localhost:9091/waves/versailles/filter/3f&gt; &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&gt; &lt;http://www.waves-rsp.org/configuration#Filter&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/filter/3f&gt; &lt;http://www.waves-rsp.org/configuration#stepRate&gt; &quot;PT3S&quot;^^&lt;http://www.w3.org/2001/XMLSchema#duration&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/filter/3f&gt; &lt;http://www.waves-rsp.org/configuration#installation&gt; &lt;http://localhost:9091/waves/versailles/installation&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/filter/3f&gt; &lt;http://www.waves-rsp.org/configuration#workers&gt; &quot;2&quot;^^&lt;http://www.w3.org/2001/XMLSchema#int&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/filter/3f&gt; &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; &quot;F-3f&quot;)
+    (triple _:c20e805a16ba217ec3de1ac65543a0e2 &lt;http://www.waves-rsp.org/configuration#frequency&gt; &quot;PT15S&quot;^^&lt;http://www.w3.org/2001/XMLSchema#duration&gt;)
+    (triple _:c20e805a16ba217ec3de1ac65543a0e2 &lt;http://www.waves-rsp.org/configuration#reporters&gt; &quot;console&quot;)
+    (triple &lt;http://localhost:9091/waves/versailles/sink/3f&gt; &lt;http://www.waves-rsp.org/configuration#numTasks&gt; &quot;2&quot;^^&lt;http://www.w3.org/2001/XMLSchema#int&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/sink/3f&gt; &lt;http://www.waves-rsp.org/configuration#outputFormat&gt; &quot;Turtle&quot;)
+    (triple &lt;http://localhost:9091/waves/versailles/sink/3f&gt; &lt;http://www.waves-rsp.org/configuration#installation&gt; &lt;http://localhost:9091/waves/versailles/installation&gt;)
+    (triple &lt;http://localhost:9091/waves/versailles/sink/3f&gt; &lt;http://www.waves-rsp.org/configuration#outputFile&gt; &quot;stdout&quot;)
+    (triple &lt;http://localhost:9091/waves/versailles/sink/3f&gt; &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; &quot;QOut-3f&quot;)
+  ))
+
+false
+</system-out>
+  </testcase>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="parseMultiGraphsTrig" time="0.004"/>
+</testsuite>
