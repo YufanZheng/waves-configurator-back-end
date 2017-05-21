@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.waves-rsp</groupId>
-    <artifactId>waves-configurator</artifactId>
-    <packaging>war</packaging>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>waves-configurator</name>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+	  <groupId>org.waves-rsp</groupId>
+	  <artifactId>waves-parent</artifactId>
+	  <version>0.2.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>waves-configurator</artifactId>
 
     <build>
         <finalName>waves-configurator</finalName>
@@ -38,6 +38,17 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- Waves project modules -->
+	    <dependency>
+	      <groupId>org.waves-rsp</groupId>
+	      <artifactId>framework</artifactId>
+	      <version>${project.version}</version>
+	    </dependency>
+	    <dependency>
+	      <groupId>org.waves-rsp</groupId>
+	      <artifactId>waves-sesame</artifactId>
+	      <version>${project.version}</version>
+	    </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet-core</artifactId>
@@ -97,6 +108,22 @@
 	      <artifactId>log4j-1.2-api</artifactId>
 	      <version>${log4j2.version}</version>
 	    </dependency>
+	    <!-- OpenRDF Sesame API -->
+	    <dependency>
+	      <groupId>org.openrdf.sesame</groupId>
+	      <artifactId>sesame-runtime</artifactId>
+	      <version>${sesame.version}</version>
+	      <exclusions>
+	        <exclusion>
+	          <groupId>org.slf4j</groupId>
+	          <artifactId>slf4j-api</artifactId>
+	        </exclusion>
+	        <exclusion>
+	          <groupId>org.slf4j</groupId>
+	          <artifactId>jcl-over-slf4j</artifactId>
+	        </exclusion>
+	      </exclusions>
+	    </dependency>
     </dependencies>
     <properties>
         <jersey.version>2.25</jersey.version>
@@ -104,4 +131,5 @@
         <jena.version>3.2.0</jena.version>
         <log4j2.version>2.1</log4j2.version>
     </properties>
+    <packaging>war</packaging>
 </project>

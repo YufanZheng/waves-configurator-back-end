@@ -28,8 +28,11 @@ import org.apache.jena.sparql.core.DatasetGraph;
 import org.apache.jena.sparql.core.DatasetGraphFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.waves_rsp.fwk.Configuration;
 import org.waves_rsp.waves_configurator.exceptions.MultiGraphsException;
 import org.waves_rsp.waves_configurator.exceptions.ZeroGraphException;
+
+import static org.waves_rsp.fwk.Configuration.APP_CONFIG_PATH_PROP;
 
 /**
  * RDFHandler is to process the TriG: parsing the data, extracting the information etc.

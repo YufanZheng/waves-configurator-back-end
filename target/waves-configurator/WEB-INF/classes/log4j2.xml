@@ -3,18 +3,21 @@
 <Configuration status="info">
 
   <Appenders>
-    <Console name="defaultLog">
-      <PatternLayout pattern="%d{DEFAULT}|%p|%c{1.}|%m%n"/>
-    </Console>
-  </Appenders>
+  	<File name="fileLog" fileName="src/main/resources/configurator.log">
+      <PatternLayout pattern="%d{DEFAULT}|%p|%c{1.}|%m%n"/>
+    </File>
+    <Console name="defaultLog">
+      <PatternLayout pattern="%d{DEFAULT}|%p|%c{1.}|%m%n"/>
+    </Console>
+  </Appenders>
 
-  <Loggers>
-    <Logger name="org.waves_rsp.waves_configurator"                level="debug"/>
-
-    <Root level="info">
-      <AppenderRef ref="defaultLog"/>
-    </Root>
-  </Loggers>
+  <Loggers>
+	<Logger name="org.waves_rsp.waves_configurator" level="debug"/>
+    <Root level="info">
+      <AppenderRef ref="defaultLog"/>
+      <AppenderRef ref="fileLog"/>
+    </Root>
+  </Loggers>
 
 </Configuration>
 

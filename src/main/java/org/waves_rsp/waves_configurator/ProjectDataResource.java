@@ -1,6 +1,9 @@
 package org.waves_rsp.waves_configurator;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Properties;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -19,6 +22,7 @@ import org.apache.logging.log4j.Logger;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import org.waves_rsp.fwk.Configuration;
 import org.waves_rsp.waves_configurator.exceptions.MultiGraphsException;
 import org.waves_rsp.waves_configurator.exceptions.ProjectNotExistException;
 import org.waves_rsp.waves_configurator.exceptions.ZeroGraphException;
@@ -46,7 +50,7 @@ public class ProjectDataResource {
     @Path("load-trig")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response loadTriG(String trig) throws InterruptedException {
+    public Response loadTriG(String trig) {
         log.info("Recieve the Trig Configuration from Client :\n\n" + trig);
         // Step 1: Convert TriG String to Jena RDF Model and Put it into Triple Store
         Boolean success = false; /* Flag to tell if the conversion step is success or not */
@@ -95,7 +99,6 @@ public class ProjectDataResource {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Thread.sleep(3000);
         log.info("Sending Response which contains the converting information to the Client side");
         return Response.ok().type(MediaType.APPLICATION_JSON_TYPE).entity(entity.toString()).build();
     }
@@ -138,15 +141,26 @@ public class ProjectDataResource {
         JSONObject entity = new JSONObject();
         Boolean success = false; /* Flag to tell if the conversion step is success or not */
         String errorMessage = ""; /* If conversion is failed, send to client the error message */
+        log.info("Retriving project information.");
         try {
-            entity.put("graphLocation", tsAccessor.getProjectLocation(projectName));
+        	log.info("Get the project location for project: " + projectName);
+        	String location = tsAccessor.getProjectLocation(projectName);
+        	// Put location as a result to entity response
+        	entity.put("location", location);
+        	log.info("Get configuration properties at path: " + location);
+        	Properties cfg = tsAccessor.getProjectConfig(location);
+        	log.info("Printing Configuration: " + cfg);
+        	// Put project properties into entity response
+        	entity.put("properties", toJsonArray(cfg));
             success = true;
-        } catch (JSONException | ProjectNotExistException e) {
+        } catch (JSONException | ProjectNotExistException | IOException e) {
             e.printStackTrace();
             if (e instanceof ProjectNotExistException) {
                 errorMessage = "Error: Project doesn't exist";
             } else if (e instanceof JSONException) {
                 errorMessage = "Error: Project location cannot be converted to json object";
+            } else if (e instanceof IOException ) {
+                errorMessage = "Error: Cannot read project properties.";
             } else {
                 errorMessage = "ERROR: Can not connect to Triple Store";
             }
@@ -162,6 +176,20 @@ public class ProjectDataResource {
             e.printStackTrace();
         }
         return Response.ok().type(MediaType.APPLICATION_JSON_TYPE).entity(entity.toString()).build();
+    }
+    
+    private JSONArray toJsonArray(Properties properties) {
+    	ArrayList<JSONObject> array = new ArrayList<JSONObject>();
+    	Enumeration en = properties.propertyNames();
+        while (en.hasMoreElements()) {
+            String key = (String) en.nextElement();
+            JSONObject o = new JSONObject();
+            try {
+				o.put(key, properties.getProperty(key));
+			} catch (JSONException e) { e.printStackTrace(); }
+            array.add(o);
+        }
+    	return new JSONArray(array);
     }
 
 }

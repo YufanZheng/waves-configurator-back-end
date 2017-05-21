@@ -1,7 +1,15 @@
 package org.waves_rsp.waves_configurator.utils;
 
+import static org.waves_rsp.fwk.Configuration.APP_CONFIG_PATH_PROP;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Properties;
@@ -16,6 +24,8 @@ import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.sparql.core.DatasetGraph;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.waves_rsp.fwk.Configuration;
+import org.waves_rsp.sesame.RdfConfiguration;
 import org.waves_rsp.waves_configurator.exceptions.MultiGraphsException;
 import org.waves_rsp.waves_configurator.exceptions.ProjectNotExistException;
 import org.waves_rsp.waves_configurator.exceptions.ZeroGraphException;
@@ -70,7 +80,6 @@ public class TripleStoreAccessor {
         Dataset allProjects = getAllProjectDatasets();
         Iterator < Node > listProjectNodes = trigHandler.listProjectNodes(allProjects);
         ArrayList < String > listProjectNames = trigHandler.listProjectNames(listProjectNodes);
-        System.out.println(listProjectNames);
         return listProjectNames;
     }
 
@@ -104,9 +113,16 @@ public class TripleStoreAccessor {
         if (!exists(projectName)) {
             throw new ProjectNotExistException();
         }
-        String url = properties.getProperty("TripleStoreLocation") + "/data?graph" +
+        String url = properties.getProperty("TripleStoreLocation") + "/data?graph=" +
             properties.getProperty("WavesProjectPrefix") + projectName;
         return url;
+    }
+    
+    public Properties getProjectConfig(String location) throws IOException{
+    	log.info("Getting project information at: " + location );
+		RdfConfiguration rcfg = new RdfConfiguration();
+		rcfg.init(location, null);
+    	return rcfg;
     }
 
     public Boolean exists(String projectName) {
