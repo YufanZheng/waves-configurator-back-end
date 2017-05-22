@@ -59,12 +59,16 @@ public class ProjectDataResource {
         String errorMessage = ""; /* If conversion is failed, send to client the error message */
         try {
             // Step 1.1 : Convert TriG String to Jena RDF Model 
-            Dataset dataset = trigHandler.toDataset(trig);
-            String graphUri = trigHandler.getBaseUri(dataset);
-            Model graphModel = trigHandler.getGraphModel(dataset);
-            projectName = trigHandler.getProjectnName(dataset);
+            Dataset dataset = trigHandler.parseToDataset(trig);
+            String graphUri = trigHandler.extractBaseUri(dataset);
+            Model graphModel = trigHandler.extractGraphModel(dataset);
+            projectName = trigHandler.extractProjectnName(dataset);
             // Step 1.2 : Put data into Triple Store
-            graphLocation = tsAccessor.putNewProject(graphUri, graphModel);
+            if( tsAccessor.exists(projectName) ){
+            	// If project exists, remove the previous project
+            	tsAccessor.removeProjectDataset(projectName);
+            }
+            graphLocation = tsAccessor.addNewProject(graphUri, graphModel);
             // Step 1.3 : If all previous steps throw no exceptions, the loading process is successed.
             success = true;
         } catch (Exception e) {
@@ -148,7 +152,7 @@ public class ProjectDataResource {
         	// Put location as a result to entity response
         	entity.put("location", location);
         	log.info("Get configuration properties at path: " + location);
-        	Properties cfg = tsAccessor.getProjectConfig(location);
+        	Properties cfg = tsAccessor.getProjectConfig(projectName);
         	log.info("Printing Configuration: " + cfg);
         	// Put project properties into entity response
         	entity.put("properties", toJsonArray(cfg));

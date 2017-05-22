@@ -9,7 +9,6 @@ import java.util.Properties;
 
 import org.apache.jena.graph.Graph;
 import org.apache.jena.graph.Node;
-import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.query.Dataset;
 import org.apache.jena.query.DatasetFactory;
 import org.apache.jena.query.Query;
@@ -25,14 +24,10 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.sparql.core.DatasetGraph;
-import org.apache.jena.sparql.core.DatasetGraphFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.waves_rsp.fwk.Configuration;
 import org.waves_rsp.waves_configurator.exceptions.MultiGraphsException;
 import org.waves_rsp.waves_configurator.exceptions.ZeroGraphException;
-
-import static org.waves_rsp.fwk.Configuration.APP_CONFIG_PATH_PROP;
 
 /**
  * RDFHandler is to process the TriG: parsing the data, extracting the information etc.
@@ -53,10 +48,10 @@ public class RDFHandler {
             e.printStackTrace();
         }
     }
-
-    /*----------------------------------------------------------------------+
-     |              			Parsing function        		            |
-     +----------------------------------------------------------------------*/
+    
+    // ------------------------------------------------------------------------
+    // Parsing function
+    // ------------------------------------------------------------------------
 
     /**
      * Convert TriG in String Format into JENA Dataset
@@ -65,7 +60,7 @@ public class RDFHandler {
      * @throws ZeroGraphException		TriG contains zero graph
      * @throws MultiGraphsException		TriG contains more than one graphs
      */
-    public Dataset toDataset(String trig) throws ZeroGraphException, MultiGraphsException {
+    public Dataset parseToDataset(String trig) throws ZeroGraphException, MultiGraphsException {
         if (trig == null) {
             throw new NullPointerException();
         }
@@ -93,35 +88,9 @@ public class RDFHandler {
         return dataset;
     }
 
-    public Dataset toDataset(Graph trig) throws ZeroGraphException, MultiGraphsException {
-        if (trig == null) {
-            throw new NullPointerException();
-        }
-        DatasetGraph dsGraph = DatasetGraphFactory.create(trig);
-        if (dsGraph.size() == 0) {
-            log.error("Invalid TriG: it contains only zero graph");
-            throw new ZeroGraphException();
-        }
-        if (dsGraph.size() >= 2) {
-            log.error("Invalid TriG: it contains more than one graphs");
-            throw new MultiGraphsException();
-        }
-        Dataset dataset = DatasetFactory.wrap(dsGraph);
-        return dataset;
-    }
-
-    public Node toGraphNode(String projectName) {
-        if (projectName == null) {
-            throw new NullPointerException("Cannot parse an null project name to TriG graph node");
-        }
-        String nodeString = properties.getProperty("WavesProjectPrefix") + projectName;
-        Node graphNode = NodeFactory.createURI(nodeString);
-        return graphNode;
-    }
-
-    /*----------------------------------------------------------------------+
-     |            Handling for one project graph dataset        	        |
-     +----------------------------------------------------------------------*/
+    // ------------------------------------------------------------------------
+    // Extracting data from one graph dataset
+    // ------------------------------------------------------------------------
 
     /**
      * Get the base Graph URI of single graph data-set
@@ -129,7 +98,7 @@ public class RDFHandler {
      * @return				Base Graph URI
      * @throws Exception	If the dataset graph doesn't contain only one graph 
      */
-    public String getBaseUri(Dataset trig) throws Exception {
+    public String extractBaseUri(Dataset trig) throws Exception {
         if (trig == null) {
             throw new NullPointerException();
         }
@@ -154,7 +123,7 @@ public class RDFHandler {
      * @return				The Jena Model inside Graph
      * @throws Exception	If the dataset graph doesn't contain only one graph 
      */
-    public Model getGraphModel(Dataset trig) throws Exception {
+    public Model extractGraphModel(Dataset trig) throws Exception {
         if (trig == null) {
             throw new NullPointerException();
         }
@@ -180,7 +149,7 @@ public class RDFHandler {
      * @return						Project Name
      * @throws Exception			If the dataset graph doesn't contain only one graph 
      */
-    public String getProjectnName(Dataset trig) throws Exception {
+    public String extractProjectnName(Dataset trig) throws Exception {
         if (trig == null) {
             throw new NullPointerException();
         }
@@ -220,9 +189,9 @@ public class RDFHandler {
         return projectName;
     }
 
-    /*----------------------------------------------------------------------+
-     |         Extracting information from whole project dataset            |
-     +----------------------------------------------------------------------*/
+    // ------------------------------------------------------------------------
+    // Extracting data from all project graph dataset
+    // ------------------------------------------------------------------------
 
     public Iterator < Node > listProjectNodes(Dataset allProjectDatasets) {
         if (allProjectDatasets == null) {

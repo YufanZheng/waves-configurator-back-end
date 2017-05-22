@@ -1,30 +1,24 @@
 package org.waves_rsp.waves_configurator.utils;
 
-import static org.waves_rsp.fwk.Configuration.APP_CONFIG_PATH_PROP;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Properties;
 
 import org.apache.jena.graph.Graph;
 import org.apache.jena.graph.Node;
+import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.query.Dataset;
 import org.apache.jena.query.DatasetAccessor;
 import org.apache.jena.query.DatasetAccessorFactory;
+import org.apache.jena.query.DatasetFactory;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.sparql.core.DatasetGraph;
+import org.apache.jena.sparql.core.DatasetGraphFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.waves_rsp.fwk.Configuration;
 import org.waves_rsp.sesame.RdfConfiguration;
 import org.waves_rsp.waves_configurator.exceptions.MultiGraphsException;
 import org.waves_rsp.waves_configurator.exceptions.ProjectNotExistException;
@@ -51,6 +45,10 @@ public class TripleStoreAccessor {
             e.printStackTrace();
         }
     }
+    
+    // ------------------------------------------------------------------------
+    // Push project configuration into Triple Store
+    // ------------------------------------------------------------------------
 
     /**
      * Put the graph into remote Triple Store 
@@ -58,7 +56,7 @@ public class TripleStoreAccessor {
      * @param graphModel	Graph Model data
      * @return				The location of graph
      */
-    public String putNewProject(String graphUri, Model graphModel) {
+    public String addNewProject(String graphUri, Model graphModel) {
         String tsLocation = properties.getProperty("TripleStoreLocation");
         log.info("Creating an accessor for remote triple store: " + tsLocation);
         DatasetAccessor accessor = DatasetAccessorFactory.createHTTP(tsLocation);
@@ -68,6 +66,10 @@ public class TripleStoreAccessor {
         log.info("The TriG Graph is located at : " + graphLocation);
         return graphLocation;
     }
+    
+    // ------------------------------------------------------------------------
+    // Access triple store the get the information for all projects
+    // ------------------------------------------------------------------------
 
     public Dataset getAllProjectDatasets() {
         log.info("Getting all the project graphs...");
@@ -82,20 +84,11 @@ public class TripleStoreAccessor {
         ArrayList < String > listProjectNames = trigHandler.listProjectNames(listProjectNodes);
         return listProjectNames;
     }
-
-    public Graph getProjectGraph(String projectName) {
-        Node graphNode = trigHandler.toGraphNode(projectName);
-        DatasetGraph allProjectGraphs = getAllProjectDatasets().asDatasetGraph();
-        Graph projectGraph = allProjectGraphs.getGraph(graphNode);
-        return projectGraph;
-    }
-
-    public Graph getProjectGraph(Node graphNode) {
-        DatasetGraph allProjectGraphs = getAllProjectDatasets().asDatasetGraph();
-        Graph projectGraph = allProjectGraphs.getGraph(graphNode);
-        return projectGraph;
-    }
-
+    
+    // ------------------------------------------------------------------------
+    // Fetch specific project data from the project name 
+    // ------------------------------------------------------------------------
+    
     public Dataset getProjectDataset(String projectName) throws ProjectNotExistException, ZeroGraphException, MultiGraphsException {
         if (projectName == null) {
             throw new NullPointerException();
@@ -103,9 +96,13 @@ public class TripleStoreAccessor {
         if (!exists(projectName)) {
             throw new ProjectNotExistException();
         }
-        return trigHandler.toDataset(getProjectGraph(projectName));
+        DatasetGraph dsGraph = DatasetGraphFactory.create();
+        Graph projectGraph = getProjectGraph(projectName);
+        Node projectGraphNode = getGraphNode(projectName);
+        dsGraph.addGraph(projectGraphNode, projectGraph);
+        return DatasetFactory.wrap(dsGraph);
     }
-
+    
     public String getProjectLocation(String projectName) throws ProjectNotExistException {
         if (projectName == null) {
             throw new NullPointerException();
@@ -118,12 +115,66 @@ public class TripleStoreAccessor {
         return url;
     }
     
-    public Properties getProjectConfig(String location) throws IOException{
+    public Graph getProjectGraph(String projectName) throws ProjectNotExistException {
+        if (projectName == null) {
+            throw new NullPointerException();
+        }
+        if (!exists(projectName)) {
+            throw new ProjectNotExistException();
+        }
+        Node graphNode = getGraphNode(projectName);
+        DatasetGraph allProjectGraphs = getAllProjectDatasets().asDatasetGraph();
+        Graph projectGraph = allProjectGraphs.getGraph(graphNode);
+        System.out.println(projectGraph);
+        return projectGraph;
+    }
+    
+    public Node getGraphNode(String projectName) throws ProjectNotExistException {
+        if (projectName == null) {
+            throw new NullPointerException();
+        }
+        if (!exists(projectName)) {
+            throw new ProjectNotExistException();
+        }
+        String nodeString = properties.getProperty("WavesProjectPrefix") + projectName;
+        Node graphNode = NodeFactory.createURI(nodeString);
+        return graphNode;
+    }
+    
+    public Properties getProjectConfig(String projectName) throws IOException, ProjectNotExistException{
+        if (projectName == null) {
+            throw new NullPointerException();
+        }
+        if (!exists(projectName)) {
+            throw new ProjectNotExistException();
+        }
+    	String location = getProjectLocation(projectName);
     	log.info("Getting project information at: " + location );
 		RdfConfiguration rcfg = new RdfConfiguration();
 		rcfg.init(location, null);
     	return rcfg;
     }
+    
+    // ------------------------------------------------------------------------
+    // Remove project
+    // ------------------------------------------------------------------------
+    
+    public void removeProjectDataset(String projectName) throws Exception{
+        if (projectName == null) {
+            throw new NullPointerException();
+        }
+        if (!exists(projectName)) {
+            throw new ProjectNotExistException();
+        }
+        Dataset dataset = getProjectDataset(projectName);
+        String graphUri = trigHandler.extractBaseUri(dataset);
+        log.info("Removing the dataset for graph: " + graphUri);
+        this.getAllProjectDatasets().removeNamedModel(graphUri);
+    }
+    
+    // ------------------------------------------------------------------------
+    // Check if project exists
+    // ------------------------------------------------------------------------
 
     public Boolean exists(String projectName) {
         return getListProjectNames().contains(projectName);

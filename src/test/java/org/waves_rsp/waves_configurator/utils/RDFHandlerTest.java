@@ -40,7 +40,7 @@ public class RDFHandlerTest {
         System.out.print(singleGraphTrig + "\n");
         DatasetGraph graph = null;
         try {
-            Dataset dataset = handler.toDataset(singleGraphTrig);
+            Dataset dataset = handler.parseToDataset(singleGraphTrig);
             graph = dataset.asDatasetGraph();
         } catch (Exception e) {} finally {
             assertTrue(graph.size() == 1);
@@ -52,7 +52,7 @@ public class RDFHandlerTest {
         System.out.println("\n-------- Run test for convert zero graph TriG string to Jena model --------\n");
         System.out.println("The empty trig string is used for test:\n");
         try {
-            handler.toDataset(zeroGraphTrig);
+            handler.parseToDataset(zeroGraphTrig);
             fail("expected exception was not occured.");
         } catch (Exception e) {
             assertTrue(e instanceof ZeroGraphException);
@@ -65,7 +65,7 @@ public class RDFHandlerTest {
         System.out.println("The trig string below is used for test:\n");
         System.out.print(multiGraphsTrig + "\n");
         try {
-            handler.toDataset(multiGraphsTrig);
+            handler.parseToDataset(multiGraphsTrig);
             fail("expected exception was not occured.");
         } catch (Exception e) {
             assertTrue(e instanceof MultiGraphsException);
@@ -78,7 +78,7 @@ public class RDFHandlerTest {
         System.out.println("The trig string below is used for test:\n");
         System.out.print(invalidTrig + "\n");
         try {
-            handler.toDataset(invalidTrig);
+            handler.parseToDataset(invalidTrig);
             fail("expected exception was not occured.");
         } catch (Exception e) {
             assertTrue(e instanceof JenaTransactionException);
@@ -91,7 +91,7 @@ public class RDFHandlerTest {
         System.out.println("The trig string below is used for test:\n");
         System.out.print(nullTrig + "\n");
         try {
-            handler.toDataset(nullTrig);
+            handler.parseToDataset(nullTrig);
             fail("expected exception was not occured.");
         } catch (Exception e) {
             assertTrue(e instanceof NullPointerException);
@@ -105,7 +105,7 @@ public class RDFHandlerTest {
     @Test public void getNullGraphBaseUri() {
         System.out.println("\n-------- Run test for get base graph URI for null TriG --------\n");
         try {
-            handler.getBaseUri(null);
+            handler.extractBaseUri(null);
             fail("expected exception was not occured.");
         } catch (Exception e) {
             assertTrue(e instanceof NullPointerException);
@@ -115,7 +115,7 @@ public class RDFHandlerTest {
     @Test public void getZeroGraphBaseUri() {
         System.out.println("\n-------- Run test for get base graph URI for zero graph TriG --------\n");
         try {
-            handler.getBaseUri(zeroGraphDataset);
+            handler.extractBaseUri(zeroGraphDataset);
             fail("expected exception was not occured.");
         } catch (Exception e) {
             assertTrue(e instanceof ZeroGraphException);
@@ -126,7 +126,7 @@ public class RDFHandlerTest {
         System.out.println("\n-------- Run test for get base graph URI for single graph TriG --------\n");
         String graphUri = null;
         try {
-            graphUri = handler.getBaseUri(singleGraphDataset);
+            graphUri = handler.extractBaseUri(singleGraphDataset);
         } catch (Exception e) {} finally {
             assertTrue(!graphUri.isEmpty());
             System.out.println("Base Graph URI is: " + graphUri);
@@ -136,7 +136,7 @@ public class RDFHandlerTest {
     @Test public void getMultiGraphBaseUri() {
         System.out.println("\n-------- Run test for get base graph URI for multi graphs TriG --------\n");
         try {
-            handler.getBaseUri(multiGraphsDataset);
+            handler.extractBaseUri(multiGraphsDataset);
             fail("expected exception was not occured.");
         } catch (Exception e) {
             assertTrue(e instanceof MultiGraphsException);
@@ -150,7 +150,7 @@ public class RDFHandlerTest {
     @Test public void getNullGraphModel() {
         System.out.println("\n-------- Run test for get graph model URI for null TriG --------\n");
         try {
-            handler.getGraphModel(null);
+            handler.extractGraphModel(null);
             fail("expected exception was not occured.");
         } catch (Exception e) {
             assertTrue(e instanceof NullPointerException);
@@ -160,7 +160,7 @@ public class RDFHandlerTest {
     @Test public void getZeroGraphModel() {
         System.out.println("\n-------- Run test for get graph model for zero graph TriG --------\n");
         try {
-            handler.getGraphModel(zeroGraphDataset);
+            handler.extractGraphModel(zeroGraphDataset);
             fail("expected exception was not occured.");
         } catch (Exception e) {
             assertTrue(e instanceof ZeroGraphException);
@@ -171,7 +171,7 @@ public class RDFHandlerTest {
         System.out.println("\n-------- Run test for get graph model for single graph TriG --------\n");
         Model model = null;
         try {
-            model = handler.getGraphModel(singleGraphDataset);
+            model = handler.extractGraphModel(singleGraphDataset);
         } catch (Exception e) {} finally {
             assertTrue(model.size() != 0);
         }
@@ -180,7 +180,7 @@ public class RDFHandlerTest {
     @Test public void getMultiGraphModel() {
         System.out.println("\n-------- Run test for get graph model for multi graphs TriG --------\n");
         try {
-            handler.getGraphModel(multiGraphsDataset);
+            handler.extractGraphModel(multiGraphsDataset);
             fail("expected exception was not occured.");
         } catch (Exception e) {
             assertTrue(e instanceof MultiGraphsException);
