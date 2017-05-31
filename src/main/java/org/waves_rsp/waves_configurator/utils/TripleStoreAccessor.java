@@ -159,7 +159,7 @@ public class TripleStoreAccessor {
     // Remove project
     // ------------------------------------------------------------------------
     
-    public void removeProjectDataset(String projectName) throws Exception{
+    public void removeProject(String projectName) throws Exception{
         if (projectName == null) {
             throw new NullPointerException();
         }

@@ -3,6 +3,7 @@ package org.waves_rsp.waves_configurator;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Properties;
 
 import javax.ws.rs.Consumes;
@@ -22,7 +23,6 @@ import org.apache.logging.log4j.Logger;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-import org.waves_rsp.fwk.Configuration;
 import org.waves_rsp.waves_configurator.exceptions.MultiGraphsException;
 import org.waves_rsp.waves_configurator.exceptions.ProjectNotExistException;
 import org.waves_rsp.waves_configurator.exceptions.ZeroGraphException;
@@ -52,39 +52,33 @@ public class ProjectDataResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response loadTriG(String trig) {
         log.info("Recieve the Trig Configuration from Client :\n\n" + trig);
+        
         // Step 1: Convert TriG String to Jena RDF Model and Put it into Triple Store
-        Boolean success = false; /* Flag to tell if the conversion step is success or not */
-        String graphLocation = ""; /* Location of the TriG graph in Triple Store */
-        String projectName = ""; /* Project name of the posted TriG project */
-        String errorMessage = ""; /* If conversion is failed, send to client the error message */
+        Boolean success = false;
+        String graphLocation = "";
+        String projectName = ""; 
+        String errorMessage = "";
+        
         try {
-            // Step 1.1 : Convert TriG String to Jena RDF Model 
+            // Step 1.1 : Convert TriG String to Jena RDF Dataset 
             Dataset dataset = trigHandler.parseToDataset(trig);
             String graphUri = trigHandler.extractBaseUri(dataset);
             Model graphModel = trigHandler.extractGraphModel(dataset);
             projectName = trigHandler.extractProjectnName(dataset);
+            
             // Step 1.2 : Put data into Triple Store
             if( tsAccessor.exists(projectName) ){
-            	// If project exists, remove the previous project
-            	tsAccessor.removeProjectDataset(projectName);
+            	tsAccessor.removeProject(projectName);
             }
             graphLocation = tsAccessor.addNewProject(graphUri, graphModel);
+            
             // Step 1.3 : If all previous steps throw no exceptions, the loading process is successed.
             success = true;
         } catch (Exception e) {
             e.printStackTrace();
-            if (e instanceof JenaTransactionException) {
-                errorMessage = "ERROR: Invalid TriG";
-            } else if (e instanceof ZeroGraphException) {
-                errorMessage = "ERROR: This TriG contains no graph";
-            } else if (e instanceof MultiGraphsException) {
-                errorMessage = "ERROR: This TriG contains more than one graph";
-            } else if (e instanceof HttpException) {
-                errorMessage = "ERROR: Can not connect to Triple Store";
-            } else {
-                errorMessage = "Unknown Error: Check the server to debug";
-            }
+            errorMessage = getErrorMessage(e);
         }
+        
         // Step 2: Create response entity to send back to client side
         JSONObject entity = new JSONObject();
         try {
@@ -93,17 +87,13 @@ public class ProjectDataResource {
                 entity.put("graphLocation", graphLocation);
                 entity.put("projectName", projectName);
                 log.info("The loading processus is successed.");
-                log.info("Project name is " + projectName + ".");
-                log.info("The TriG graph locates at:" + graphLocation);
             } else {
                 entity.put("errorMessage", errorMessage);
-                log.error("The loading processus failed");
-                log.error(errorMessage);
+                log.error("The loading processus failed. " + errorMessage);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        log.info("Sending Response which contains the converting information to the Client side");
         return Response.ok().type(MediaType.APPLICATION_JSON_TYPE).entity(entity.toString()).build();
     }
 
@@ -149,25 +139,16 @@ public class ProjectDataResource {
         try {
         	log.info("Get the project location for project: " + projectName);
         	String location = tsAccessor.getProjectLocation(projectName);
-        	// Put location as a result to entity response
-        	entity.put("location", location);
         	log.info("Get configuration properties at path: " + location);
         	Properties cfg = tsAccessor.getProjectConfig(projectName);
         	log.info("Printing Configuration: " + cfg);
+        	success = true;
         	// Put project properties into entity response
+        	entity.put("location", location);
         	entity.put("properties", toJsonArray(cfg));
-            success = true;
         } catch (JSONException | ProjectNotExistException | IOException e) {
             e.printStackTrace();
-            if (e instanceof ProjectNotExistException) {
-                errorMessage = "Error: Project doesn't exist";
-            } else if (e instanceof JSONException) {
-                errorMessage = "Error: Project location cannot be converted to json object";
-            } else if (e instanceof IOException ) {
-                errorMessage = "Error: Cannot read project properties.";
-            } else {
-                errorMessage = "ERROR: Can not connect to Triple Store";
-            }
+            errorMessage = getErrorMessage(e);
         }
         try {
             entity.put("success", success);
@@ -184,7 +165,7 @@ public class ProjectDataResource {
     
     private JSONArray toJsonArray(Properties properties) {
     	ArrayList<JSONObject> array = new ArrayList<JSONObject>();
-    	Enumeration en = properties.propertyNames();
+    	Enumeration<?> en = properties.propertyNames();
         while (en.hasMoreElements()) {
             String key = (String) en.nextElement();
             JSONObject o = new JSONObject();
@@ -194,6 +175,24 @@ public class ProjectDataResource {
             array.add(o);
         }
     	return new JSONArray(array);
+    }
+    
+    private String getErrorMessage(Exception e){
+    	String errorMessage = "";
+    	if (e instanceof JenaTransactionException) {
+            errorMessage = "ERROR: Cannot parse invalid TriG";
+        } else if (e instanceof ZeroGraphException) {
+            errorMessage = "ERROR: This TriG contains no graph";
+        } else if (e instanceof MultiGraphsException) {
+            errorMessage = "ERROR: This TriG contains more than one graph";
+        } else if (e instanceof HttpException) {
+            errorMessage = "ERROR: Can not connect to Triple Store";
+        }  else if (e instanceof ProjectNotExistException) {
+            errorMessage = "ERROR: Project doesn't exist";
+        } else {
+            errorMessage = "Unknown Error: Check the server to debug";
+        }
+    	return errorMessage;
     }
 
 }
