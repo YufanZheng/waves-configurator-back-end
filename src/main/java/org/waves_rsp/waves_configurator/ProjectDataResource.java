@@ -186,7 +186,7 @@ public class ProjectDataResource {
         } else if (e instanceof MultiGraphsException) {
             errorMessage = "ERROR: This TriG contains more than one graph";
         } else if (e instanceof HttpException) {
-            errorMessage = "ERROR: Can not connect to Triple Store";
+            errorMessage = "ERROR: Can not connect to Triple Store or Repository not exists";
         }  else if (e instanceof ProjectNotExistException) {
             errorMessage = "ERROR: Project doesn't exist";
         } else {
