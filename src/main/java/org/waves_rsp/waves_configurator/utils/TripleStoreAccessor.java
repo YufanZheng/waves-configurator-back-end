@@ -57,7 +57,7 @@ public class TripleStoreAccessor {
      * @return				The location of graph
      */
     public String addNewProject(String graphUri, Model graphModel) {
-        String tsLocation = properties.getProperty("TripleStoreLocation");
+        String tsLocation = getWavesRepository();
         log.info("Creating an accessor for remote triple store: " + tsLocation);
         DatasetAccessor accessor = DatasetAccessorFactory.createHTTP(tsLocation);
         log.info("Pushing TriG graph into Triple Store...");
@@ -68,13 +68,24 @@ public class TripleStoreAccessor {
     }
     
     // ------------------------------------------------------------------------
+    // Get triple store location
+    // ------------------------------------------------------------------------
+    
+    public String getWavesRepository(){
+    	String host = properties.getProperty("ts.host");
+    	String port = properties.getProperty("ts.port");
+    	String repository = properties.getProperty("ts.repository");
+    	return "http://" + host + ":" + port + "/" + repository;
+    }
+    
+    // ------------------------------------------------------------------------
     // Access triple store the get the information for all projects
     // ------------------------------------------------------------------------
 
     public Dataset getAllProjectDatasets() {
         log.info("Getting all the project graphs...");
-        String tsLocation = properties.getProperty("TripleStoreLocation");
-        Dataset dataset = RDFDataMgr.loadDataset(tsLocation);
+        String wavesRepo = getWavesRepository();
+        Dataset dataset = RDFDataMgr.loadDataset(wavesRepo);
         return dataset;
     }
 
@@ -110,7 +121,7 @@ public class TripleStoreAccessor {
         if (!exists(projectName)) {
             throw new ProjectNotExistException();
         }
-        String url = properties.getProperty("TripleStoreLocation") + "/data?graph=" +
+        String url = getWavesRepository() + "/data?graph=" +
             properties.getProperty("WavesProjectPrefix") + projectName;
         return url;
     }

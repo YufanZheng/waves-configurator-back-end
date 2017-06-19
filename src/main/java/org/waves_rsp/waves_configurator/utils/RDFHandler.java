@@ -188,6 +188,45 @@ public class RDFHandler {
         log.info("Project name of TriG graph is: " + projectName);
         return projectName;
     }
+    
+    public ArrayList< String > extractFilterNames(Dataset trig) throws ZeroGraphException, MultiGraphsException{
+        if (trig == null) {
+            throw new NullPointerException();
+        }
+        // Check if the trig contains only one graph
+        DatasetGraph dsGraph = trig.asDatasetGraph();
+        if (dsGraph.size() == 0) {
+            throw new ZeroGraphException();
+        }
+        if (dsGraph.size() >= 2) {
+            throw new MultiGraphsException();
+        }
+        ArrayList< String > filterNames = new ArrayList< String >();
+        String queryString =
+            "prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+            "prefix waves:  <http://www.waves-rsp.org/configuration#>\n" +
+            "prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#>\n" +
+            "\n" +
+            "SELECT ?label \n" +
+            "WHERE {\n" +
+            "  ?filter rdf:type waves:Filter.\n" +
+            "  ?filter rdfs:label ?label.\n" +
+            "}";
+        Query query = QueryFactory.create(queryString);
+        Node graphNode = dsGraph.listGraphNodes().next();
+        Graph graph = dsGraph.getGraph(graphNode);
+        Model model = ModelFactory.createModelForGraph(graph);
+        log.info("Executing SPARQL Query to get project name.");
+        try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
+            ResultSet results = qexec.execSelect();
+            for (; results.hasNext();) {
+                QuerySolution soln = results.nextSolution();
+                Literal label = soln.getLiteral("label"); // Get a result variable - must be a literal
+                filterNames.add( label.getString() );
+            }
+        }
+    	return filterNames;
+    }
 
     // ------------------------------------------------------------------------
     // Extracting data from all project graph dataset

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="17" failures="0" name="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" time="0.065" errors="0" skipped="0">
+<testsuite tests="17" failures="0" name="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" time="0.041" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib"/>
@@ -26,7 +26,7 @@
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/Users/yufan/Documents/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf507940181303252189.tmp"/>
+    <property name="classworlds.conf" value="/Users/yufan/Documents/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf4291112716361863241.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/yufan/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -63,20 +63,20 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
   <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getListNodesForMultiGraphs" time="0.01"/>
-  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getMultiGraphModel" time="0.001"/>
-  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getZeroGraphModel" time="0.001"/>
-  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="parseInvalidTrig" time="0.004"/>
-  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="parseSingleGraphTrig" time="0.019"/>
-  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="parseZeroGraphTrig" time="0.018"/>
-  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getSingleGraphModel" time="0.001"/>
-  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getListNodesForNull" time="0.001"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getMultiGraphModel" time="0"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getZeroGraphModel" time="0"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="parseInvalidTrig" time="0.003"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="parseSingleGraphTrig" time="0.013"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="parseZeroGraphTrig" time="0.003"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getSingleGraphModel" time="0.002"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getListNodesForNull" time="0"/>
   <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getNullGraphBaseUri" time="0"/>
-  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getZeroGraphBaseUri" time="0.001"/>
-  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getNullGraphModel" time="0.001"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getZeroGraphBaseUri" time="0"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getNullGraphModel" time="0"/>
   <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getMultiGraphBaseUri" time="0.001"/>
-  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getListNodesForSingleGraph" time="0.001"/>
-  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getSingleGraphBaseUri" time="0.002"/>
-  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="parseNullTrig" time="0"/>
-  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getListNodesForZeroGraph" time="0.001"/>
-  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="parseMultiGraphsTrig" time="0.003"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getListNodesForSingleGraph" time="0.002"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getSingleGraphBaseUri" time="0.001"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="parseNullTrig" time="0.002"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="getListNodesForZeroGraph" time="0"/>
+  <testcase classname="org.waves_rsp.waves_configurator.utils.RDFHandlerTest" name="parseMultiGraphsTrig" time="0.004"/>
 </testsuite>
