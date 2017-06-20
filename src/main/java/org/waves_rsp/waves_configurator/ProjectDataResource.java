@@ -3,7 +3,6 @@ package org.waves_rsp.waves_configurator;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Properties;
 
 import javax.ws.rs.Consumes;

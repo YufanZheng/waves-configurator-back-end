@@ -13,8 +13,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-import org.waves_rsp.waves_configurator.exceptions.MultiGraphsException;
-import org.waves_rsp.waves_configurator.exceptions.ZeroGraphException;
 import org.waves_rsp.waves_configurator.utils.ClusterAccessor;
 
 @Path("project-execution")
